@@ -41,4 +41,3 @@ func _ready():
 
 func generate():
 	pass
-		
