@@ -3,7 +3,7 @@ extends KinematicBody2D
 
 # Variables
 var movement : Vector2 = Vector2.ZERO
-var MAX_SPEED : int = 50
+const MAX_SPEED : int = 50
 
 # Called at start
 func _ready():
