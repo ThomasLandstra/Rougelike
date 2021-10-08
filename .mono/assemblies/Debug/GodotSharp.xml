@@ -1119,7 +1119,7 @@
         </member>
         <member name="P:Godot.Node.Filename">
             <summary>
-            <para>If a scene is instantiated from a file, its topmost node contains the absolute file path from which it was loaded in <see cref="P:Godot.Node.Filename"/> (e.g. <c>res://levels/1.tscn</c>). Otherwise, <see cref="P:Godot.Node.Filename"/> is set to an empty string.</para>
+            <para>When a scene is instanced from a file, its topmost node contains the filename from which it was loaded.</para>
             </summary>
         </member>
         <member name="P:Godot.Node.Owner">
@@ -1352,7 +1352,6 @@
             <summary>
             <para>Adds the node to a group. Groups are helpers to name and organize a subset of nodes, for example "enemies" or "collectables". A node can be in any number of groups. Nodes can be assigned a group at any time, but will not be added until they are inside the scene tree (see <see cref="M:Godot.Node.IsInsideTree"/>). See notes in the description, and the group methods in <see cref="T:Godot.SceneTree"/>.</para>
             <para>The <c>persistent</c> option is used when packing node to <see cref="T:Godot.PackedScene"/> and saving to file. Non-persistent groups aren't stored.</para>
-            <para>Note: For performance reasons, the order of node groups is not guaranteed. The order of node groups should not be relied upon as it can vary across project runs.</para>
             </summary>
         </member>
         <member name="M:Godot.Node.RemoveFromGroup(System.String)">
@@ -1373,7 +1372,6 @@
         <member name="M:Godot.Node.GetGroups">
             <summary>
             <para>Returns an array listing the groups that the node is a member of.</para>
-            <para>Note: For performance reasons, the order of node groups is not guaranteed. The order of node groups should not be relied upon as it can vary across project runs.</para>
             </summary>
         </member>
         <member name="M:Godot.Node.Raise">
@@ -1763,14 +1761,12 @@
         </member>
         <member name="M:Godot.Object.GetClass">
             <summary>
-            <para>Returns the object's class as a <see cref="T:System.String"/>. See also <see cref="M:Godot.Object.IsClass(System.String)"/>.</para>
-            <para>Note: <see cref="M:Godot.Object.GetClass"/> does not take <c>class_name</c> declarations into account. If the object has a <c>class_name</c> defined, the base class name will be returned instead.</para>
+            <para>Returns the object's class as a <see cref="T:System.String"/>.</para>
             </summary>
         </member>
         <member name="M:Godot.Object.IsClass(System.String)">
             <summary>
-            <para>Returns <c>true</c> if the object inherits from the given <c>class</c>. See also <see cref="M:Godot.Object.GetClass"/>.</para>
-            <para>Note: <see cref="M:Godot.Object.IsClass(System.String)"/> does not take <c>class_name</c> declarations into account. If the object has a <c>class_name</c> defined, <see cref="M:Godot.Object.IsClass(System.String)"/> will return <c>false</c> for that name.</para>
+            <para>Returns <c>true</c> if the object inherits from the given <c>class</c>.</para>
             </summary>
         </member>
         <member name="M:Godot.Object.Set(System.String,System.Object)">
@@ -6569,7 +6565,7 @@
         </member>
         <member name="F:Godot.PropertyHint.ExpRange">
             <summary>
-            <para>Hints that a float property should be within an exponential range specified via the hint string <c>"min,max"</c> or <c>"min,max,step"</c>. The hint string can optionally include <c>"or_greater"</c> and/or <c>"or_lesser"</c> to allow manual input going respectively above the max or below the min values. Example: <c>"0.01,100,0.01,or_greater"</c>.</para>
+            <para>Hints that an integer or float property should be within an exponential range specified via the hint string <c>"min,max"</c> or <c>"min,max,step"</c>. The hint string can optionally include <c>"or_greater"</c> and/or <c>"or_lesser"</c> to allow manual input going respectively above the max or below the min values. Example: <c>"0.01,100,0.01,or_greater"</c>.</para>
             </summary>
         </member>
         <member name="F:Godot.PropertyHint.Enum">
@@ -12182,7 +12178,7 @@
         </member>
         <member name="P:Godot.BaseButton.EnabledFocusMode">
             <summary>
-            <para>Deprecated. This property has been deprecated due to redundancy and will be removed in Godot 4.0. This property no longer has any effect when set. Please use <see cref="P:Godot.Control.FocusMode"/> instead.</para>
+            <para>Deprecated. This property has been deprecated due to redundancy and no longer has any effect when set. Please use <see cref="P:Godot.Control.FocusMode"/> instead.</para>
             </summary>
         </member>
         <member name="P:Godot.BaseButton.KeepPressedOutside">
@@ -15693,10 +15689,8 @@
                 var player_score = config.get_value(player, "best_score")
                 score_data[player_name] = player_score
             </code></para>
-            <para>Any operation that mutates the ConfigFile such as <see cref="M:Godot.ConfigFile.SetValue(System.String,System.String,System.Object)"/>, <see cref="M:Godot.ConfigFile.Clear"/>, or <see cref="M:Godot.ConfigFile.EraseSection(System.String)"/>, only changes what is loaded in memory. If you want to write the change to a file, you have to save the changes with <see cref="M:Godot.ConfigFile.Save(System.String)"/>, <see cref="M:Godot.ConfigFile.SaveEncrypted(System.String,System.Byte[])"/>, or <see cref="M:Godot.ConfigFile.SaveEncryptedPass(System.String,System.String)"/>.</para>
             <para>Keep in mind that section and property names can't contain spaces. Anything after a space will be ignored on save and on load.</para>
             <para>ConfigFiles can also contain manually written comment lines starting with a semicolon (<c>;</c>). Those lines will be ignored when parsing the file. Note that comments will be lost when saving the ConfigFile. This can still be useful for dedicated server configuration files, which are typically never overwritten without explicit user action.</para>
-            <para>Note: The file extension given to a ConfigFile does not have any impact on its formatting or behavior. By convention, the <c>.cfg</c> extension is used here, but any other extension such as <c>.ini</c> is also valid. Since neither <c>.cfg</c> nor <c>.ini</c> are standardized, Godot's ConfigFile formatting may differ from files written by other programs.</para>
             </summary>
         </member>
         <member name="M:Godot.ConfigFile.SetValue(System.String,System.String,System.Object)">
@@ -15779,11 +15773,6 @@
             <summary>
             <para>Saves the contents of the <see cref="T:Godot.ConfigFile"/> object to the AES-256 encrypted file specified as a parameter, using the provided <c>password</c> to encrypt it. The output file uses an INI-style structure.</para>
             <para>Returns one of the <see cref="T:Godot.Error"/> code constants (<c>OK</c> on success).</para>
-            </summary>
-        </member>
-        <member name="M:Godot.ConfigFile.Clear">
-            <summary>
-            <para>Removes the entire contents of the config.</para>
             </summary>
         </member>
         <member name="T:Godot.ConfirmationDialog">
@@ -16355,7 +16344,6 @@
             <para>* control is obstructed by another <see cref="T:Godot.Control"/> on top of it, which doesn't have <see cref="P:Godot.Control.MouseFilter"/> set to ;</para>
             <para>* control's parent has <see cref="P:Godot.Control.MouseFilter"/> set to  or has accepted the event;</para>
             <para>* it happens outside the parent's rectangle and the parent has either <see cref="P:Godot.Control.RectClipContent"/> or <see cref="M:Godot.Control._ClipsInput"/> enabled.</para>
-            <para>Note: Event position is relative to the control origin.</para>
             </summary>
         </member>
         <member name="M:Godot.Control._MakeCustomTooltip(System.String)">
@@ -18575,9 +18563,8 @@
         <member name="T:Godot.Font">
             <summary>
             <para>Font contains a Unicode-compatible character set, as well as the ability to draw it with variable width, ascent, descent and kerning. For creating fonts from TTF files (or other font formats), see the editor support for fonts.</para>
-            <para>Note: If a <see cref="T:Godot.DynamicFont"/> doesn't contain a character used in a string, the character in question will be replaced with codepoint <c>0xfffd</c> if it's available in the <see cref="T:Godot.DynamicFont"/>. If this replacement character isn't available in the DynamicFont, the character will be hidden without displaying any replacement character in the string.</para>
-            <para>Note: If a <see cref="T:Godot.BitmapFont"/> doesn't contain a character used in a string, the character in question will be hidden without displaying any replacement character in the string.</para>
-            <para>Note: Unicode characters after <c>0xffff</c> (such as most emoji) are not supported on Windows. They will display as unknown characters instead. This will be resolved in Godot 4.0.</para>
+            <para>Note: If a DynamicFont doesn't contain a character used in a string, the character in question will be replaced with codepoint <c>0xfffd</c> if it's available in the DynamicFont. If this replacement character isn't available in the DynamicFont, the character will be hidden without displaying any replacement character in the string.</para>
+            <para>Note: If a BitmapFont doesn't contain a character used in a string, the character in question will be hidden without displaying any replacement character in the string.</para>
             </summary>
         </member>
         <member name="M:Godot.Font.Draw(Godot.RID,Godot.Vector2,System.String,System.Nullable{Godot.Color},System.Int32,System.Nullable{Godot.Color})">
@@ -20608,7 +20595,7 @@
             <summary>
             <para>Creates request on the underlying <see cref="T:Godot.HTTPClient"/>. If there is no configuration errors, it tries to connect using <see cref="M:Godot.HTTPClient.ConnectToHost(System.String,System.Int32,System.Boolean,System.Boolean)"/> and passes parameters onto <see cref="M:Godot.HTTPClient.Request(Godot.HTTPClient.Method,System.String,System.String[],System.String)"/>.</para>
             <para>Returns  if request is successfully created. (Does not imply that the server has responded),  if not in the tree,  if still processing previous request,  if given string is not a valid URL format, or  if not using thread and the <see cref="T:Godot.HTTPClient"/> cannot connect to host.</para>
-            <para>Note: When <c>method</c> is , the payload sent via <c>request_data</c> might be ignored by the server or even cause the server to reject the request (check <a href="https://datatracker.ietf.org/doc/html/rfc7231#section-4.3.1">RFC 7231 section 4.3.1</a> for more details). As a workaround, you can send data as a query string in the URL. See <c>String.http_escape</c> for an example.</para>
+            <para>Note: The <c>request_data</c> parameter is ignored if <c>method</c> is . This is because GET methods can't contain request data. As a workaround, you can pass request data as a query string in the URL. See <c>String.http_escape</c> for an example.</para>
             </summary>
             <param name="customHeaders">If the parameter is null, then the default value is new string[] {}</param>
         </member>
@@ -21324,7 +21311,6 @@
         <member name="M:Godot.Image.GenerateMipmaps(System.Boolean)">
             <summary>
             <para>Generates mipmaps for the image. Mipmaps are precalculated lower-resolution copies of the image that are automatically used if the image needs to be scaled down when rendered. They help improve image quality and performance when rendering. This method returns an error if the image is compressed, in a custom format, or if the image's width/height is <c>0</c>.</para>
-            <para>Note: Mipmap generation is done on the CPU, is single-threaded and is always done on the main thread. This means generating mipmaps will result in noticeable stuttering during gameplay, even if <see cref="M:Godot.Image.GenerateMipmaps(System.Boolean)"/> is called from a <see cref="T:Godot.Thread"/>.</para>
             </summary>
         </member>
         <member name="M:Godot.Image.ClearMipmaps">
@@ -22731,11 +22717,6 @@
             <para>Returns the <see cref="T:Godot.Object"/> ID associated with the list.</para>
             </summary>
         </member>
-        <member name="T:Godot.JNISingleton">
-            <summary>
-            <para>The JNISingleton is implemented only in the Android export. It's used to call methods and connect signals from an Android plugin written in Java or Kotlin. Methods and signals can be called and connected to the JNISingleton as if it is a Node. See <a href="https://en.wikipedia.org/wiki/Java_Native_Interface">Java Native Interface - Wikipedia</a> for more information.</para>
-            </summary>
-        </member>
         <member name="T:Godot.JSONParseResult">
             <summary>
             <para>Returned by <see cref="M:Godot.JSON.Parse(System.String)"/>, <see cref="T:Godot.JSONParseResult"/> contains the decoded JSON or error information if the JSON source wasn't successfully parsed. You can check if the JSON source was successfully parsed with <c>if json_result.error == OK</c>.</para>
@@ -23215,7 +23196,6 @@
             <summary>
             <para>Label displays plain text on the screen. It gives you control over the horizontal and vertical alignment and can wrap the text inside the node's bounding rectangle. It doesn't support bold, italics, or other formatting. For that, use <see cref="T:Godot.RichTextLabel"/> instead.</para>
             <para>Note: Contrarily to most other <see cref="T:Godot.Control"/>s, Label's <see cref="P:Godot.Control.MouseFilter"/> defaults to  (i.e. it doesn't react to mouse input events). This implies that a label won't display any configured <see cref="P:Godot.Control.HintTooltip"/>, unless you change its mouse filter.</para>
-            <para>Note: Unicode characters after <c>0xffff</c> (such as most emoji) are not supported on Windows. They will display as unknown characters instead. This will be resolved in Godot 4.0.</para>
             </summary>
         </member>
         <member name="F:Godot.Label.AlignEnum.Left">
@@ -23841,7 +23821,6 @@
         <member name="P:Godot.Line2D.Antialiased">
             <summary>
             <para>If <c>true</c>, the line's border will be anti-aliased.</para>
-            <para>Note: Line2D is not accelerated by batching when being anti-aliased.</para>
             </summary>
         </member>
         <member name="M:Godot.Line2D.SetPointPosition(System.Int32,Godot.Vector2)">
@@ -25701,7 +25680,6 @@
         <member name="P:Godot.NetworkedMultiplayerENet.CompressionMode">
             <summary>
             <para>The compression method used for network packets. These have different tradeoffs of compression speed versus bandwidth, you may need to test which one works best for your use case if you use compression at all.</para>
-            <para>Note: <see cref="P:Godot.NetworkedMultiplayerENet.CompressionMode"/> must be set to the same value on both the server and all its clients. Clients will fail to connect if the <see cref="P:Godot.NetworkedMultiplayerENet.CompressionMode"/> set on the client differs from the one set on the server.</para>
             </summary>
         </member>
         <member name="P:Godot.NetworkedMultiplayerENet.TransferChannel">
@@ -26058,7 +26036,6 @@
         <member name="M:Godot.Node2D.GetAngleTo(Godot.Vector2)">
             <summary>
             <para>Returns the angle between the node and the <c>point</c> in radians.</para>
-            <para><a href="https://raw.githubusercontent.com/godotengine/godot-docs/master/img/node2d_get_angle_to.png">Illustration of the returned angle.</a></para>
             </summary>
         </member>
         <member name="M:Godot.Node2D.ToLocal(Godot.Vector2)">
@@ -32156,9 +32133,7 @@
             <para>Rich text can contain custom text, fonts, images and some basic formatting. The label manages these as an internal tag stack. It also adapts itself to given width/heights.</para>
             <para>Note: Assignments to <see cref="P:Godot.RichTextLabel.BbcodeText"/> clear the tag stack and reconstruct it from the property's contents. Any edits made to <see cref="P:Godot.RichTextLabel.BbcodeText"/> will erase previous edits made from other manual sources such as <see cref="M:Godot.RichTextLabel.AppendBbcode(System.String)"/> and the <c>push_*</c> / <see cref="M:Godot.RichTextLabel.Pop"/> methods.</para>
             <para>Note: RichTextLabel doesn't support entangled BBCode tags. For example, instead of using <c>[b]bold[i]bold italic[/b]italic[/i]</c>, use <c>[b]bold[i]bold italic[/i][/b][i]italic[/i]</c>.</para>
-            <para>Note: <c>push_*/pop</c> functions won't affect BBCode.</para>
             <para>Note: Unlike <see cref="T:Godot.Label"/>, RichTextLabel doesn't have a property to horizontally align text to the center. Instead, enable <see cref="P:Godot.RichTextLabel.BbcodeEnabled"/> and surround the text in a <c>[center]</c> tag as follows: <c>[center]Example[/center]</c>. There is currently no built-in way to vertically align text either, but this can be emulated by relying on anchors/containers and the <see cref="P:Godot.RichTextLabel.FitContentHeight"/> property.</para>
-            <para>Note: Unicode characters after <c>0xffff</c> (such as most emoji) are not supported on Windows. They will display as unknown characters instead. This will be resolved in Godot 4.0.</para>
             </summary>
         </member>
         <member name="F:Godot.RichTextLabel.Align.Left">
@@ -33060,7 +33035,7 @@
         <member name="P:Godot.SceneTree.Paused">
             <summary>
             <para>If <c>true</c>, the <see cref="T:Godot.SceneTree"/> is paused. Doing so will have the following behavior:</para>
-            <para>- 2D and 3D physics will be stopped. This includes signals and collision detection.</para>
+            <para>- 2D and 3D physics will be stopped.</para>
             <para>- <see cref="M:Godot.Node._Process(System.Single)"/>, <see cref="M:Godot.Node._PhysicsProcess(System.Single)"/> and <see cref="M:Godot.Node._Input(Godot.InputEvent)"/> will not be called anymore in nodes.</para>
             </summary>
         </member>
@@ -33175,9 +33150,7 @@
             <summary>
             <para>Calls <c>method</c> on each member of the given group, respecting the given <see cref="T:Godot.SceneTree.GroupCallFlags"/>. You can pass arguments to <c>method</c> by specifying them at the end of the method call.</para>
             <para>Note: <c>method</c> may only have 5 arguments at most (8 arguments passed to this method in total).</para>
-            <para><code>
-            get_tree().call_group_flags(SceneTree.GROUP_CALL_REALTIME | SceneTree.GROUP_CALL_REVERSE, "bases", "destroy") # Call the method immediately and in reverse order.
-            </code></para>
+            <para>Note: Group call flags are used to control the method calling behavior. If the  flag is present in the <c>flags</c> argument, methods will be called immediately. If this flag isn't present in <c>flags</c>, methods will be called with a one-frame delay in a way similar to <see cref="M:Godot.SceneTree.CallGroup(System.String,System.String,System.Object[])"/>.</para>
             </summary>
         </member>
         <member name="M:Godot.SceneTree.NotifyGroupFlags(System.UInt32,System.String,System.Int32)">
@@ -33192,7 +33165,7 @@
         </member>
         <member name="M:Godot.SceneTree.CallGroup(System.String,System.String,System.Object[])">
             <summary>
-            <para>Calls <c>method</c> on each member of the given group. You can pass arguments to <c>method</c> by specifying them at the end of the method call. This method is equivalent of calling <see cref="M:Godot.SceneTree.CallGroupFlags(System.Int32,System.String,System.String,System.Object[])"/> with  flag.</para>
+            <para>Calls <c>method</c> on each member of the given group. You can pass arguments to <c>method</c> by specifying them at the end of the method call.</para>
             <para>Note: <c>method</c> may only have 5 arguments at most (7 arguments passed to this method in total).</para>
             <para>Note: <see cref="M:Godot.SceneTree.CallGroup(System.String,System.String,System.Object[])"/> will always call methods with an one-frame delay, in a way similar to <see cref="M:Godot.Object.CallDeferred(System.String,System.Object[])"/>. To call methods immediately, use <see cref="M:Godot.SceneTree.CallGroupFlags(System.Int32,System.String,System.String,System.Object[])"/> with the  flag.</para>
             </summary>
@@ -36514,7 +36487,6 @@
         <member name="P:Godot.StyleBoxFlat.AntiAliasing">
             <summary>
             <para>Antialiasing draws a small ring around the edges, which fades to transparency. As a result, edges look much smoother. This is only noticeable when using rounded corners.</para>
-            <para>Note: When using beveled corners with 45-degree angles (<see cref="P:Godot.StyleBoxFlat.CornerDetail"/> = 1), it is recommended to set <see cref="P:Godot.StyleBoxFlat.AntiAliasing"/> to <c>false</c> to ensure crisp visuals and avoid possible visual glitches.</para>
             </summary>
         </member>
         <member name="P:Godot.StyleBoxFlat.AntiAliasingSize">
@@ -42333,7 +42305,7 @@
             <para>The <c>inputs</c> array contains the values of the input ports.</para>
             <para><c>outputs</c> is an array whose indices should be set to the respective outputs.</para>
             <para>The <c>start_mode</c> is usually , unless you have used the <c>STEP_*</c> constants.</para>
-            <para><c>working_mem</c> is an array which can be used to persist information between runs of the custom node. The size needs to be predefined using <see cref="M:Godot.VisualScriptCustomNode._GetWorkingMemorySize"/>.</para>
+            <para><c>working_mem</c> is an array which can be used to persist information between runs of the custom node.</para>
             <para>When returning, you can mask the returned value with one of the <c>STEP_*</c> constants.</para>
             </summary>
         </member>
@@ -48227,7 +48199,7 @@
         </member>
         <member name="M:Godot.Engine.GetFramesDrawn">
             <summary>
-            <para>Returns the total number of frames drawn. On headless platforms, or if the render loop is disabled with <c>--disable-render-loop</c> via command line, <see cref="M:Godot.Engine.GetFramesDrawn"/> always returns <c>0</c>. See <see cref="M:Godot.Engine.GetIdleFrames"/>.</para>
+            <para>Returns the total number of frames drawn. If the render loop is disabled with <c>--disable-render-loop</c> via command line, this returns <c>0</c>. See also <see cref="M:Godot.Engine.GetIdleFrames"/>.</para>
             </summary>
         </member>
         <member name="M:Godot.Engine.GetFramesPerSecond">
@@ -48237,24 +48209,12 @@
         </member>
         <member name="M:Godot.Engine.GetPhysicsFrames">
             <summary>
-            <para>Returns the total number of frames passed since engine initialization which is advanced on each physics frame. See also <see cref="M:Godot.Engine.GetIdleFrames"/>.</para>
-            <para><see cref="M:Godot.Engine.GetPhysicsFrames"/> can be used to run expensive logic less often without relying on a <see cref="T:Godot.Timer"/>:</para>
-            <para><code>
-            func _physics_process(_delta):
-                if Engine.get_physics_frames() % 2 == 0:
-                    pass  # Run expensive logic only once every 2 physics frames here.
-            </code></para>
+            <para>Returns the total number of frames passed since engine initialization which is advanced on each physics frame.</para>
             </summary>
         </member>
         <member name="M:Godot.Engine.GetIdleFrames">
             <summary>
-            <para>Returns the total number of frames passed since engine initialization which is advanced on each idle frame, regardless of whether the render loop is enabled. See also <see cref="M:Godot.Engine.GetFramesDrawn"/> and <see cref="M:Godot.Engine.GetPhysicsFrames"/>.</para>
-            <para><see cref="M:Godot.Engine.GetIdleFrames"/> can be used to run expensive logic less often without relying on a <see cref="T:Godot.Timer"/>:</para>
-            <para><code>
-            func _process(_delta):
-                if Engine.get_idle_frames() % 2 == 0:
-                    pass  # Run expensive logic only once every 2 idle (render) frames here.
-            </code></para>
+            <para>Returns the total number of frames passed since engine initialization which is advanced on each idle frame, regardless of whether the render loop is enabled. See also <see cref="M:Godot.Engine.GetFramesDrawn"/>.</para>
             </summary>
         </member>
         <member name="M:Godot.Engine.GetMainLoop">
@@ -49051,19 +49011,16 @@
         <member name="M:Godot.Mutex.Lock">
             <summary>
             <para>Locks this <see cref="T:Godot.Mutex"/>, blocks until it is unlocked by the current owner.</para>
-            <para>Note: This function returns without blocking if the thread already has ownership of the mutex.</para>
             </summary>
         </member>
         <member name="M:Godot.Mutex.TryLock">
             <summary>
             <para>Tries locking this <see cref="T:Godot.Mutex"/>, but does not block. Returns  on success,  otherwise.</para>
-            <para>Note: This function returns  if the thread already has ownership of the mutex.</para>
             </summary>
         </member>
         <member name="M:Godot.Mutex.Unlock">
             <summary>
             <para>Unlocks this <see cref="T:Godot.Mutex"/>, leaving it to other threads.</para>
-            <para>Note: If a thread called <see cref="M:Godot.Mutex.Lock"/> or <see cref="M:Godot.Mutex.TryLock"/> multiple times while already having ownership of the mutex, it must also call <see cref="M:Godot.Mutex.Unlock"/> the same number of times in order to unlock it correctly.</para>
             </summary>
         </member>
         <member name="T:Godot.OS">
@@ -49806,16 +49763,12 @@
         </member>
         <member name="M:Godot.OS.DelayUsec(System.Int32)">
             <summary>
-            <para>Delays execution of the current thread by <c>usec</c> microseconds. <c>usec</c> must be greater than or equal to <c>0</c>. Otherwise, <see cref="M:Godot.OS.DelayUsec(System.Int32)"/> will do nothing and will print an error message.</para>
-            <para>Note: <see cref="M:Godot.OS.DelayUsec(System.Int32)"/> is a blocking way to delay code execution. To delay code execution in a non-blocking way, see <see cref="M:Godot.SceneTree.CreateTimer(System.Single,System.Boolean)"/>. Yielding with <see cref="M:Godot.SceneTree.CreateTimer(System.Single,System.Boolean)"/> will delay the execution of code placed below the <c>yield</c> without affecting the rest of the project (or editor, for <see cref="!:Godot.EditorPlugin"/>s and <see cref="!:Godot.EditorScript"/>s).</para>
-            <para>Note: When <see cref="M:Godot.OS.DelayUsec(System.Int32)"/> is called on the main thread, it will freeze the project and will prevent it from redrawing and registering input until the delay has passed. When using <see cref="M:Godot.OS.DelayUsec(System.Int32)"/> as part of an <see cref="!:Godot.EditorPlugin"/> or <see cref="!:Godot.EditorScript"/>, it will freeze the editor but won't freeze the project if it is currently running (since the project is an independent child process).</para>
+            <para>Delay execution of the current thread by <c>usec</c> microseconds. <c>usec</c> must be greater than or equal to <c>0</c>. Otherwise, <see cref="M:Godot.OS.DelayUsec(System.Int32)"/> will do nothing and will print an error message.</para>
             </summary>
         </member>
         <member name="M:Godot.OS.DelayMsec(System.Int32)">
             <summary>
-            <para>Delays execution of the current thread by <c>msec</c> milliseconds. <c>msec</c> must be greater than or equal to <c>0</c>. Otherwise, <see cref="M:Godot.OS.DelayMsec(System.Int32)"/> will do nothing and will print an error message.</para>
-            <para>Note: <see cref="M:Godot.OS.DelayMsec(System.Int32)"/> is a blocking way to delay code execution. To delay code execution in a non-blocking way, see <see cref="M:Godot.SceneTree.CreateTimer(System.Single,System.Boolean)"/>. Yielding with <see cref="M:Godot.SceneTree.CreateTimer(System.Single,System.Boolean)"/> will delay the execution of code placed below the <c>yield</c> without affecting the rest of the project (or editor, for <see cref="!:Godot.EditorPlugin"/>s and <see cref="!:Godot.EditorScript"/>s).</para>
-            <para>Note: When <see cref="M:Godot.OS.DelayMsec(System.Int32)"/> is called on the main thread, it will freeze the project and will prevent it from redrawing and registering input until the delay has passed. When using <see cref="M:Godot.OS.DelayMsec(System.Int32)"/> as part of an <see cref="!:Godot.EditorPlugin"/> or <see cref="!:Godot.EditorScript"/>, it will freeze the editor but won't freeze the project if it is currently running (since the project is an independent child process).</para>
+            <para>Delay execution of the current thread by <c>msec</c> milliseconds. <c>msec</c> must be greater than or equal to <c>0</c>. Otherwise, <see cref="M:Godot.OS.DelayMsec(System.Int32)"/> will do nothing and will print an error message.</para>
             </summary>
         </member>
         <member name="M:Godot.OS.GetTicksMsec">

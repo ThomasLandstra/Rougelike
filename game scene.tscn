@@ -5,10 +5,10 @@
 [ext_resource path="res://src/scripts/scene_controller.gd" type="Script" id=3]
 [ext_resource path="res://src/scripts/player.gd" type="Script" id=4]
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.5, 8 )
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=2]
 resource_name = "Idle_East"
 loop = true
 tracks/0/type = "value"
@@ -57,13 +57,13 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ SubResource( 4 ) ]
+"values": [ SubResource( 1 ) ]
 }
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 5, 8 )
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=4]
 resource_name = "Idle_North"
 loop = true
 tracks/0/type = "value"
@@ -112,11 +112,10 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ SubResource( 6 ) ]
+"values": [ SubResource( 3 ) ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "Idle_South"
+[sub_resource type="Animation" id=5]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("body:frame")
@@ -152,7 +151,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ SubResource( 6 ) ]
+"values": [ SubResource( 3 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("CollisionShape2D:position")
@@ -167,7 +166,7 @@ tracks/3/keys = {
 "values": [ Vector2( 8, 8 ) ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=6]
 resource_name = "Idle_West"
 loop = true
 tracks/0/type = "value"
@@ -216,7 +215,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ SubResource( 4 ) ]
+"values": [ SubResource( 1 ) ]
 }
 
 [node name="Node2D" type="Node2D"]
@@ -239,10 +238,10 @@ hframes = 6
 vframes = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="player"]
-anims/Idle_East = SubResource( 5 )
-anims/Idle_North = SubResource( 7 )
-anims/Idle_South = SubResource( 3 )
-anims/Idle_West = SubResource( 8 )
+anims/Idle_East = SubResource( 2 )
+anims/Idle_North = SubResource( 4 )
+anims/Idle_South = SubResource( 5 )
+anims/Idle_West = SubResource( 6 )
 
 [node name="Camera2D" type="Camera2D" parent="player"]
 position = Vector2( 8, 8 )
@@ -255,4 +254,4 @@ drag_margin_bottom = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
 position = Vector2( 7.5, 8 )
-shape = SubResource( 4 )
+shape = SubResource( 1 )

@@ -24,8 +24,8 @@ func _physics_process(delta):
 
 func get_input_axis(): 
 	var axis = Vector2.ZERO
-	axis.x = int(Input.is_action_pressed("ui_right")) - int(Input.is_action_pressed("ui_left"))
-	axis.y = int(Input.is_action_pressed("ui_down")) - int(Input.is_action_pressed("ui_up"))
+	axis.x = int(Input.is_key_pressed(KEY_D) or Input.is_action_pressed("ui_right")) - int(Input.is_key_pressed(KEY_A)  or Input.is_action_pressed("ui_left"))
+	axis.y = int(Input.is_key_pressed(KEY_S) or Input.is_action_pressed("ui_down")) - int(Input.is_key_pressed(KEY_W)  or Input.is_action_pressed("ui_up"))
 	return axis.normalized()
 	
 func apply_movement(move_axis):
