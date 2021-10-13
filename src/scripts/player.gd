@@ -5,8 +5,8 @@ extends KinematicBody2D
 var movement : Vector2 = Vector2.ZERO
 var direction : String = "South"
 var last_direction : String = ""
-const MAX_SPEED : int = 50
-const SPRINT : float = 1.5
+export(int) var MAX_SPEED = 48
+export(float) var SPRINT = 1.5
 
 
 
@@ -17,7 +17,7 @@ func _ready():
 
 
 # Called once per frame
-func _physics_process(_delta):
+func _physics_process(delta):
 	# Get direction and movement axis
 	movement = get_input_axis()
 	get_direction(movement)
@@ -25,8 +25,9 @@ func _physics_process(_delta):
 	# Get movement
 	if not movement == Vector2.ZERO: # If moving
 		# Set speed
-		movement.x *= MAX_SPEED * (SPRINT if Input.is_key_pressed(KEY_SHIFT) else 1)
-		movement.y *= MAX_SPEED * (SPRINT if Input.is_key_pressed(KEY_SHIFT) else 1)
+		movement.x *= MAX_SPEED * (SPRINT if Input.is_key_pressed(KEY_SHIFT) else 1) * (delta + 1)
+		movement.y *= MAX_SPEED * (SPRINT if Input.is_key_pressed(KEY_SHIFT) else 1) * (delta + 1)
+		movement.clamped(MAX_SPEED)
 
 	# Move
 	move_and_slide(movement)
