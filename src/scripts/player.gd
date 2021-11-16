@@ -7,7 +7,7 @@ var direction : String = "South"
 var last_direction : String = ""
 export(int) var MAX_SPEED = 48
 export(float) var SPRINT = 1.5
-
+export(float) var stamina = 3
 
 
 func _ready():
@@ -25,8 +25,7 @@ func _physics_process(delta):
 	# Get movement
 	if not movement == Vector2.ZERO: # If moving
 		# Set speed
-		movement.x *= MAX_SPEED * (SPRINT if Input.is_key_pressed(KEY_SHIFT) else 1) * (delta + 1)
-		movement.y *= MAX_SPEED * (SPRINT if Input.is_key_pressed(KEY_SHIFT) else 1) * (delta + 1)
+		movement *= MAX_SPEED * (SPRINT if Input.is_key_pressed(KEY_SHIFT) else 1) * (delta + 1)
 		movement.clamped(MAX_SPEED)
 
 	# Move
