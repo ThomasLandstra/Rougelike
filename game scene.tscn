@@ -13,9 +13,7 @@ position = Vector2( 67.0401, 43.4313 )
 z_index = 1
 collision/safe_margin = 0.001
 
-[node name="Navigation" type="Navigation2D" parent="." groups=[
-"level_navigation",
-]]
+[node name="Navigation" type="Navigation2D" parent="." groups=["level_navigation"]]
 
 [node name="TileMap" type="TileMap" parent="Navigation"]
 tile_set = ExtResource( 1 )
