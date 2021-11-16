@@ -428,7 +428,9 @@ tracks/3/keys = {
 "values": [ SubResource( 1 ) ]
 }
 
-[node name="player" type="KinematicBody2D"]
+[node name="player" type="KinematicBody2D" groups=[
+"player",
+]]
 collision_layer = 2
 script = ExtResource( 1 )
 
