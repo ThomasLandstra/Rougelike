@@ -25,11 +25,12 @@ func _physics_process(delta):
 	# Get movement
 	if not movement == Vector2.ZERO: # If moving
 		# Set speed
-		movement *= MAX_SPEED * (SPRINT if Input.is_key_pressed(KEY_SHIFT) else 1) * (delta + 1)
-		movement.clamped(MAX_SPEED)
+		var move_times = MAX_SPEED * (SPRINT if Input.is_key_pressed(KEY_SHIFT) else 1) * (delta + 1)
+		movement *= move_times
+		movement = movement.clamped(move_times)
 
 	# Move
-	move_and_slide(movement)
+	movement = move_and_slide(movement)
 	apply_animation()
 
 
