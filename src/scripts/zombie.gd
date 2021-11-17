@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 const MAX_SPEED: int = 48
+const LOS_FIX: Vector2 = Vector2(8,8)
 var velocity: Vector2 = Vector2.ZERO
 
 var path: Array = []	# Contains destination positions
@@ -26,16 +27,17 @@ func _physics_process(delta):
 	line2d.global_position = Vector2.ZERO
 	spotted = check_player_in_detection()
 	
-	if spotted:
-		generate_path()
+	if player:
+		if spotted:
+			generate_path()
 
-	navigate(delta)
-	if velocity != Vector2.ZERO:
-		get_direction(velocity)
-		$AnimationPlayer.play("Run_"+last_direction)
-		velocity = move_and_slide(velocity.clamped(MAX_SPEED))
-	else:
-		$AnimationPlayer.play("Idle_"+last_direction)
+		navigate(delta)
+		if velocity != Vector2.ZERO:
+			get_direction(velocity)
+			$AnimationPlayer.play("Run_"+last_direction)
+			velocity = move_and_slide(velocity.clamped(MAX_SPEED))
+		else:
+			$AnimationPlayer.play("Idle_"+last_direction)
 
 func navigate(delta):	# Define the next position to go to
 	if path.size() > 0 and spotted:
@@ -53,15 +55,20 @@ func navigate(delta):	# Define the next position to go to
 	else: velocity = Vector2.ZERO
 
 func generate_path():	# It's obvious
-	path = levelNavigation.get_simple_path(global_position, player.global_position, false)
-	line2d.points = path
+	if levelNavigation != null and player != null:
+		path = levelNavigation.get_simple_path(global_position, player.global_position, false)
+		line2d.points = path
 
 
 func check_player_in_detection() -> bool:
-	los.look_at(player.global_position)
-	var collider = los.get_collider()
-	if collider and collider.is_in_group("player"):
-		return true
+	if player != null:
+		los.look_at(player.global_position + LOS_FIX)
+		los.visible = true
+		print(los.rotation_degrees)
+		var collider = los.get_collider()
+		print(collider)
+		if collider and collider.is_in_group("player"):
+			return true
 	return false
 
 func get_direction(axis : Vector2):
