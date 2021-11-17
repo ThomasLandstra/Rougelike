@@ -64,9 +64,7 @@ func check_player_in_detection() -> bool:
 	if player != null:
 		los.look_at(player.global_position + LOS_FIX)
 		los.visible = true
-		print(los.rotation_degrees)
 		var collider = los.get_collider()
-		print(collider)
 		if collider and collider.is_in_group("player"):
 			return true
 	return false
@@ -74,7 +72,7 @@ func check_player_in_detection() -> bool:
 func get_direction(axis : Vector2):
 	var negative_x = false
 	var negative_y = false
-
+	
 	if axis.x < 0:
 		axis.x *= -1
 		negative_x = true
