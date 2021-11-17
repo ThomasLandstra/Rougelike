@@ -69,12 +69,7 @@ func _process(delta):
 			grid_pos.x -= 8
 
 func generate_map():
-	for row in map:
-		for _i in range(8):
-			row.append(0)
-
-	map[randi() % 8][randi() % 8] = 1
-	map[randi() % 8][randi() % 8] = 2
+	pass	
 
 func generate_room():
 	var enemy = load("res://src/nodes/zombie.tscn")
